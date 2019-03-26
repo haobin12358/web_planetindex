@@ -1,13 +1,23 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <!--<img src="./assets/logo.png">-->
     <router-view/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  created: function () {
+    if (document.documentElement.clientWidth > 750) {
+      require('./style/pc.less');
+      // this.plaform = 'pc';
+    } else {
+      require('./style/mobile.less');
+      // this.plaform = 'mobile';
+
+    }
+  }
 }
 </script>
 
@@ -18,6 +28,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /*margin-top: 60px;*/
 }
 </style>

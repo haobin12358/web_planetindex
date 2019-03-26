@@ -112,7 +112,14 @@
           <div class="m-circle-box">
             <el-carousel :interval="400000" type="card" height="580px">
               <el-carousel-item v-for="item in 6" :key="item">
-                <h3>{{ item }}</h3>
+                <div class="m-circle-detail">
+                  <div class="m-circle-title">
+                    <span>圈子标题1</span>
+                    <span class="m-time">2019/03/20</span>
+                  </div>
+                  <img src="" class="m-circle-img" alt="">
+                  <p>公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内…</p>
+                </div>
               </el-carousel-item>
             </el-carousel>
           </div>

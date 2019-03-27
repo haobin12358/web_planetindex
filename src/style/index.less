@@ -83,11 +83,12 @@ ul{
 .flex-row(@justify: space-between;@align:center) {
   display: flex;
   justify-content: @justify;
-  align-content: @align;
+  align-items: @align;
 }
 
-.flex-column(@type: space-between;) {
+.flex-column(@type: space-between;@align:center) {
   display: flex;
   justify-content: @type;
+  align-items: @align;
   flex-direction: column;
 }

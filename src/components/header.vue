@@ -1,11 +1,20 @@
 <template>
-  <div class="m-top-nav " :class="is_index?'':'m-not-index'">
-    <ul>
-      <li v-for="(item,index) in nav_list" :class="item.click?'active':''" @click="navClick(item,index)">
+  <div class="m-top-nav " :class=" $store.state.platform == 'mobile'?'mobile': (is_index?'':'m-not-index')">
+    <div class="m-side-bg" v-if="$store.state.platform == 'mobile' && show_side">
+      <img src="/static/images/icon-slide.png" class="m-side-more" alt="">
+      <ul>
+        <li v-for="(item,index) in nav_list" :class="$store.state.select_name == item.name?'active':''" @click="navClick(item,index)">
+          {{item.name}}
+        </li>
+      </ul>
+    </div>
+    <img v-else-if="$store.state.platform == 'mobile' && !show_side" src="/static/images/icon-slide.png" class="m-side-more m-outside" alt="">
+    <ul v-else>
+      <li v-for="(item,index) in nav_list" :class="$store.state.select_name == item.name?'active':''" @click="navClick(item,index)">
         {{item.name}}
       </li>
     </ul>
-    <span class="m-supper-btn" @click="changeSupper">·供应商入驻</span>
+    <span v-if=" $store.state.platform == 'pc'" class="m-supper-btn" @click="changeSupper">·供应商入驻</span>
   </div>
 
 </template>
@@ -63,7 +72,8 @@
             value:'contact',
             click:false
           }
-        ]
+        ],
+        show_side:true
       }
     },
     props:{
@@ -77,10 +87,7 @@
     },
     methods:{
       navClick(item,index){
-        for(let i in this.nav_list){
-          this.nav_list[i].click = false;
-        }
-        this.nav_list[index].click = true;
+        this.$store.state.select_name = item.name;
         if(item.url.indexOf('/') > -1){
           this.$router.push(item.url)
         }else{
@@ -92,57 +99,15 @@
         }
       },
       changeSupper(){
+        this.$store.state.select_name = '';
         this.$router.push('/supper/index')
-      }
+      },
     }
 
   }
 </script>
 
 <style scoped lang="less">
-  @import "../style/index";
-  .m-top-nav{
-    position: absolute;
-    top:0;
-    z-index: 1000;
-    font-size: 20px;
-    width: 100%;
-    padding: 0 40px 0 100px;
-    height: 80px;
-    line-height: 60px;
-    color: #fff;
-    .flex-row(space-between);
-    background-color: rgba(0,0,0,0.5);
-    ul{
-      .flex-row(flex-start);
-      li{
-        margin-right: 60px;
-        cursor: pointer;
-        &.active{
-          font-weight: bold;
-        }
-      }
-    }
-    .m-supper-btn{
-      display: block;
-      width: 300px;
-      height: 60px;
-      font-size: 20px;
-      cursor: pointer;
-    }
-  }
-  .m-index-page{
-    .m-top-nav{
-      background-color: transparent;
-      .m-supper-btn{
-        display: block;
-        width: 300px;
-        height: 60px;
-        font-size: 30px;
-        border: 3px solid #fff;
-        border-radius: 60px;
-        cursor: pointer;
-      }
-    }
-  }
+
+
 </style>

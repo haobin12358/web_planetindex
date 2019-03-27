@@ -11,11 +11,10 @@ export default {
   created: function () {
     if (document.documentElement.clientWidth > 750) {
       require('./style/pc.less');
-      // this.plaform = 'pc';
+      this.$store.state.platform = 'pc';
     } else {
       require('./style/mobile.less');
-      // this.plaform = 'mobile';
-
+      this.$store.state.platform = 'mobile';
     }
   }
 }

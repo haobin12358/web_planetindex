@@ -77,24 +77,16 @@
           <div class="m-add-product">
             <div class="m-product">
               <ul class="m-product-ul">
-                <li>
-                  <img src="" class="m-product-img" alt="">
-                </li>
-                <li>
-                  <img src="" class="m-product-img" alt="">
-                </li>
-                <li>
-                  <img src="" class="m-product-img" alt="">
-                </li>
-                <li>
-                  <img src="" class="m-product-img" alt="">
-                </li>
-                <li>
-                  <img src="" class="m-product-img" alt="">
-                </li>
+                <template v-for="(item,index) in product_list">
+                  <li >
+                    <img :src="item.prmainpic" class="m-product-img" alt="">
+                  </li>
+                </template>
+
+
                 <li class="m-code">
-                  <img src="" class="m-code-img" alt="">
-                  <p v-if="$store.state.platform == 'pc'">微信扫码查看商品</p>
+                  <img src="/static/images/coce_index.png" class="m-code-img" alt="">
+                  <p  v-if="$store.state.platform == 'pc'">微信扫码查看商品</p>
                 </li>
               </ul>
               <div class="m-activity-img-box" v-if="$store.state.platform == 'pc'">
@@ -102,53 +94,37 @@
                 <p>微信扫码查看活动详情</p>
               </div>
             </div>
-            <div class="m-wei-code-box">
-              <div class="m-one">
-                <img src="" class="m-code-img" alt="">
-                <p>扫二维码微信登录</p>
-              </div>
-            </div>
+            <!--<div class="m-wei-code-box">-->
+              <!--<div class="m-one">-->
+                <!--<img src="" class="m-code-img" alt="">-->
+                <!--<p>扫二维码微信登录</p>-->
+              <!--</div>-->
+            <!--</div>-->
           </div>
 
           <h3 class="m-title" id="circle">行星精选圈子</h3>
           <p class="m-title-intro">分享我的户外生活</p>
           <div class="m-circle-box">
             <el-carousel :interval="400000" type="card" v-if="$store.state.platform == 'pc'" height="580px">
-              <el-carousel-item v-for="item in 6" :key="item">
+              <el-carousel-item v-for="item in circle_list" :key="item">
                 <div class="m-circle-detail" @click="toCircle">
                   <div class="m-circle-title">
-                    <span>圈子标题1</span>
-                    <span class="m-time">2019/03/20</span>
+                    <span>{{item.netitle}}</span>
+                    <!--<span class="m-time">2019/03/20</span>-->
                   </div>
-                  <img src="" class="m-circle-img" alt="">
+                  <img :src="item.mainpic" class="m-circle-img" alt="">
                   <p>公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内…</p>
                 </div>
               </el-carousel-item>
             </el-carousel>
             <div v-if="$store.state.platform == 'mobile'" class="m-circle-scroll">
-              <div class="m-circle-detail" @click="toCircle">
+              <div class="m-circle-detail" v-for="(item,index) in circle_list" @click="toCircle(item)">
                 <div class="m-circle-title">
-                  <span>圈子标题1</span>
-                  <span class="m-time">2019/03/20</span>
+                  <span>{{item.netitle}}</span>
+                  <!--<span class="m-time">{{2019/03/20}}</span>-->
                 </div>
-                <img src="" class="m-circle-img" alt="">
-                <p>公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内…</p>
-              </div>
-              <div class="m-circle-detail" @click="toCircle">
-                <div class="m-circle-title">
-                  <span>圈子标题1</span>
-                  <span class="m-time">2019/03/20</span>
-                </div>
-                <img src="" class="m-circle-img" alt="">
-                <p>公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内…</p>
-              </div>
-              <div class="m-circle-detail" @click="toCircle">
-                <div class="m-circle-title">
-                  <span>圈子标题1</span>
-                  <span class="m-time">2019/03/20</span>
-                </div>
-                <img src="" class="m-circle-img" alt="">
-                <p>公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内…</p>
+                <img :src="item.mainpic" class="m-circle-img" alt="">
+                <p>item</p>
               </div>
             </div>
 
@@ -158,69 +134,15 @@
           <p class="m-title-intro">分享我的户外生活</p>
           <div class="m-brand-box">
             <ul>
-              <li>
-                <img src="" class="m-brand-img" alt="">
-              </li>
-              <li class="m-brand-text">
-                <h3>品牌名称</h3>
-                <p>介绍</p>
-              </li>
-              <li>
-                <img src="" class="m-brand-img" alt="">
-              </li>
-              <li class="m-brand-text">
-                <h3>品牌名称</h3>
-                <p>介绍</p>
-              </li>
-              <li>
-                <img src="" class="m-brand-img" alt="">
-              </li>
-              <li class="m-brand-text">
-                <h3>品牌名称</h3>
-                <p>介绍</p>
-              </li>
-              <li class="m-brand-text">
-                <h3>品牌名称</h3>
-                <p>介绍</p>
-              </li>
-              <li>
-                <img src="" class="m-brand-img" alt="">
-              </li>
-              <li class="m-brand-text">
-                <h3>品牌名称</h3>
-                <p>介绍</p>
-              </li>
-              <li>
-                <img src="" class="m-brand-img" alt="">
-              </li>
-              <li class="m-brand-text">
-                <h3>品牌名称</h3>
-                <p>介绍</p>
-              </li>
-              <li>
-                <img src="" class="m-brand-img" alt="">
-              </li>
-              <li>
-                <img src="" class="m-brand-img" alt="">
-              </li>
-              <li class="m-brand-text">
-                <h3>品牌名称</h3>
-                <p>介绍</p>
-              </li>
-              <li>
-                <img src="" class="m-brand-img" alt="">
-              </li>
-              <li class="m-brand-text">
-                <h3>品牌名称</h3>
-                <p>介绍</p>
-              </li>
-              <li>
-                <img src="" class="m-brand-img" alt="">
-              </li>
-              <li class="m-brand-text">
-                <h3>品牌名称</h3>
-                <p>介绍</p>
-              </li>
+              <template v-for="(item,index) in  brand_list">
+                <li>
+                  <img :src="item.pblogo" class="m-brand-img" alt="">
+                </li>
+                <li class="m-brand-text">
+                  <h3>{{item.pbname}}</h3>
+                  <p>{{item.pbdesc}}</p>
+                </li>
+              </template>
             </ul>
           </div>
 
@@ -271,7 +193,7 @@
            </div>
           </div>
         </section>
-        <footer class="m-footer">
+        <footer class="m-footer" id="telephone">
           <img src="" class="m-footer-code" alt="">
           <div class="m-footer-text">
             <p>地址：大行星地址大行星地址行星地址大行星地址</p>
@@ -293,16 +215,55 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import axios from 'axios';
+  import api from '../../api/api'
     export default {
         name: "index",
+      data(){
+          return{
+            brand_list:[],
+            product_list:[],
+            circle_list:[],
+            notice_list:[]
+          }
+      },
       mounted(){
           if(this.$route.query.id){
             document.getElementById(this.$route.query.id).scrollIntoView();
           }
       },
+      created(){
+          this.getBrand();
+          this.getCircle();
+      },
       methods:{
         toCircle(){
           this.$router.push('/circle/detail');
+        },
+        getBrand(){
+          axios.get(api.brand_recommend,{
+            params:{
+              page_num:1,
+              page_size:5
+            }
+          }).then(res => {
+            if(res.data.status == 200){
+              this.brand_list = res.data.data.brands;
+              this.product_list = res.data.data.recommend_for_you;
+            }
+          })
+        },
+        getCircle(){
+          axios.get(api.get_all_news,{
+            params:{
+              page_num:1,
+              page_size:12
+            }
+          }).then(res => {
+            if(res.data.status == 200){
+              this.circle_list = res.data.data;
+            }
+          })
         }
       }
     }

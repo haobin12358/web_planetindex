@@ -7,6 +7,13 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/style/index.less';
 import store from './vuex';
+import axios from 'axios'
+import promise from 'es6-promise';//解决axios在ie9下不生效的方法
+promise.polyfill();
+Vue.prototype.$http = axios;
+// 超时时间
+axios.defaults.timeout = 60000;
+
 
 Vue.use(ElementUI)
 Vue.config.productionTip = false

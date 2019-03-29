@@ -14,6 +14,7 @@
       color: #fff;
       background-color: rgba(0,0,0,0.5);
       text-align: left;
+      transition: width 1s;
     }
     .m-side-more {
      display: inline-block;
@@ -150,6 +151,7 @@
         margin-top: 40px;
       }
       .m-add-product{
+        margin-bottom: 100px;
         .m-product{
           .m-product-ul{
             .flex-row(space-between,center);
@@ -159,14 +161,23 @@
                 display: block;
                 width: 250px;
                 height: 250px;
-                background-color: aquamarine;
+                //background-color: aquamarine;
               }
               &.m-code{
+                border: 45px solid #F1F7F8;
+                border-bottom-color: #DEDEDE;
+                border-left-color: #DEDEDE;
+                position: relative;
                 .m-code-img{
                   display: block;
-                  width: 250px;
-                  height: 250px;
-                  background-color: aquamarine;
+                  width: 160px;
+                  height: 160px;
+                }
+                p{
+                  position: absolute;
+                  bottom: -38px;
+                  color: #0C406C;
+                  font-size: 12px;
                 }
               }
             }
@@ -185,7 +196,7 @@
               display: inline-block;
               width: 120px;
               height: 120px;
-              background-color: aquamarine;
+              //background-color: aquamarine;
             }
           }
         }
@@ -357,7 +368,7 @@
       width: 250px;
       height: 250px;
       margin-right: 20px;
-      background-color: #0C406C;
+      //background-color: #0C406C;
     }
   }
   .m-text{

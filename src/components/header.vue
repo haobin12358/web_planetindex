@@ -1,14 +1,14 @@
 <template>
   <div class="m-top-nav " :class=" $store.state.platform == 'mobile'?'mobile': (is_index?'':'m-not-index')">
     <div class="m-side-bg" v-if="$store.state.platform == 'mobile' && show_side">
-      <img src="/static/images/icon-slide.png" class="m-side-more" alt="">
+      <img src="/static/images/icon-slide.png" class="m-side-more" alt="" @click="changeSide">
       <ul>
         <li v-for="(item,index) in nav_list" :class="$store.state.select_name == item.name?'active':''" @click="navClick(item,index)">
           {{item.name}}
         </li>
       </ul>
     </div>
-    <img v-else-if="$store.state.platform == 'mobile' && !show_side" src="/static/images/icon-slide.png" class="m-side-more m-outside" alt="">
+    <img v-else-if="$store.state.platform == 'mobile' && !show_side" src="/static/images/icon-slide.png" class="m-side-more m-outside" alt="" @click="changeSide">
     <ul v-else>
       <li v-for="(item,index) in nav_list" :class="$store.state.select_name == item.name?'active':''" @click="navClick(item,index)">
         {{item.name}}
@@ -68,12 +68,12 @@
           },
           {
             name:'联系方式',
-            url:'/contact',
-            value:'contact',
+            url:'telephone',
+            value:'telephone',
             click:false
           }
         ],
-        show_side:true
+        show_side:false
       }
     },
     props:{
@@ -102,6 +102,10 @@
         this.$store.state.select_name = '';
         this.$router.push('/supper/index')
       },
+      changeSide(){
+        this.show_side = !this.show_side;
+        console.log(this.show_side)
+      }
     }
 
   }

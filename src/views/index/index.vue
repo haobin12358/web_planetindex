@@ -110,7 +110,7 @@
                 <div class="m-circle-detail" @click="toCircle">
                   <div class="m-circle-title">
                     <span>{{item.netitle}}</span>
-                    <!--<span class="m-time">2019/03/20</span>-->
+                    <span class="m-time">{{item.createtime}}</span>
                   </div>
                   <img :src="item.mainpic" class="m-circle-img" alt="">
                   <p>公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内…</p>
@@ -121,7 +121,7 @@
               <div class="m-circle-detail" v-for="(item,index) in circle_list" @click="toCircle(item)">
                 <div class="m-circle-title">
                   <span>{{item.netitle}}</span>
-                  <!--<span class="m-time">{{2019/03/20}}</span>-->
+                  <span class="m-time">{{item.createtime.slice(0,10)}}</span>
                 </div>
                 <img :src="item.mainpic" class="m-circle-img" alt="">
                 <p>item</p>

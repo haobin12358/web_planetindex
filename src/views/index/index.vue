@@ -18,7 +18,7 @@
             <div class="m-top-code-box" v-if="$store.state.platform == 'pc'">
               <img src="" class="m-code-img" alt="">
             </div>
-            <p v-if="$store.state.platform == 'pc'">扫二维码微信登录</p>
+            <!--<p v-if="$store.state.platform == 'pc'">扫二维码微信登录</p>-->
           </div>
         </section>
         <div  v-if="$store.state.platform == 'mobile'">

@@ -12,12 +12,12 @@
       {{item.content}}
       </p>
       <div class="m-video-box" v-if="item.type == 'video'">
-        <video :src="item.content.video" id="videoPlay" v-if="show_video">您的浏览器不支持 video 视频播放</video>
-        <div class="m-img-box" @click="playVideo" v-else>
-          <img :src="item.content.thumbnail" alt="">
-          <span class="m-play-icon"></span>
-          <span class="m-video-time">{{item.content.duration}}</span>
-        </div>
+        <video :src="item.content.video" id="videoPlay" :poster="item.content.thumbnail" controls="controls" >您的浏览器不支持 video 视频播放</video>
+        <!--<div class="m-img-box" @click="playVideo" >-->
+          <!--<img :src="item.content.thumbnail" alt="">-->
+          <!--<span class="m-play-icon" @click="playVideo"></span>-->
+          <!--<span class="m-video-time">{{item.content.duration}}</span>-->
+        <!--</div>-->
 
       </div>
 
@@ -46,7 +46,7 @@
     name: "notice",
     data(){
       return{
-        circle_message:null,
+        circle_message:{},
         show_video:false,
         dialogImg:'',
         dialogVisible:false
@@ -72,7 +72,6 @@
       playVideo() {
         let vdo = document.getElementById("videoPlay");
         this.show_video = true;
-        this.dialogVisible = true;
         vdo.play();
       },
       previewImg(i){

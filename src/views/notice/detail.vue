@@ -1,28 +1,48 @@
 <template>
   <div class="m-circle-detail-page">
-    <h3 class="m-title">标题</h3>
-    <p class="m-time">2019/03/20</p>
-    <p class="m-text">
-      公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内…
-    </p>
-
-    <p class="m-text">
-      公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内…
-    </p>
+    <h3 class="m-title">{{message_info.cmtitle}}</h3>
+    <p class="m-time">{{message_info.createtime}}</p>
+    <div v-html="message_info.cmmessage">
+    </div>
 
     <div class="m-btn-box">
-      <span><上一篇</span>
-      <span class="m-active">下一篇></span>
+      <span class="m-active" v-if="message_info.before.CMid" @click="changeContent(message_info.before.CMid)"><上一篇</span>
+      <span  v-else><上一篇</span>
+      <span class="m-active" @click="changeContent(message_info.after.CMid)">下一篇></span>
     </div>
   </div>
 </template>
 
 <script>
+  import axios from 'axios';
+  import api from '../../api/api'
   export default {
     name: "notice",
-    mounted(){
-      document.documentElement.scrollTop=0
+    data(){
+      return{
+        message_info:null
+      }
     },
+    mounted(){
+      document.documentElement.scrollTop=0;
+      this.getMessage();
+    },
+    methods:{
+      getMessage( id ){
+        axios.get(api.club_message,{
+          params:{
+            CMid: id || this.$route.query.CMid
+          }
+        }).then(res => {
+          if(res.data.status == 200){
+            this.message_info = res.data.data;
+          }
+        })
+      },
+      changeContent(id){
+        this.getMessage( id );
+      }
+    }
   }
 </script>
 

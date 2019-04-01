@@ -113,7 +113,7 @@
                     <span class="m-time">{{item.createtime}}</span>
                   </div>
                   <img :src="item.mainpic" class="m-circle-img" alt="">
-                  <p>公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内…</p>
+                  <p>{{item.netext || '大行星精选'}}</p>
                 </div>
               </el-carousel-item>
             </el-carousel>
@@ -149,20 +149,10 @@
           <h3 class="m-title" id="notice">大行星公告</h3>
           <div class="m-notice-box">
             <ul v-if="$store.state.platform == 'pc'">
-              <li>
-                <h3>标题</h3>
-                <p class="m-time">2018/05/14</p>
-                <div class="m-notice-text">公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内内容公告内</div>
-              </li>
-              <li>
-                <h3>标题</h3>
-                <p class="m-time">2018/05/14</p>
-                <div class="m-notice-text">公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内内容公告内</div>
-              </li>
-              <li>
-                <h3>标题</h3>
-                <p class="m-time">2018/05/14</p>
-                <div class="m-notice-text">公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内内容公告内</div>
+              <li v-for="(item,index) in notice_list" @click="toNoticeDetail(item)">
+                <h3>{{item.cmtitle}}</h3>
+                <p class="m-time">{{item.createtime.slice(0,10)}}</p>
+                <div class="m-notice-text" v-html="item.cmmessage"></div>
               </li>
             </ul>
             <ul v-if="$store.state.platform == 'mobile'">
@@ -176,7 +166,7 @@
               </li>
             </ul>
             <p class="m-notice-more">
-              <span>历史公告</span>
+              <span @click="changeRoute('/notice/index')">历史公告</span>
             </p>
           </div>
 
@@ -224,7 +214,7 @@
             brand_list:[],
             product_list:[],
             circle_list:[],
-            notice_list:[]
+            notice_list:[],
           }
       },
       mounted(){
@@ -235,11 +225,24 @@
       created(){
           this.getBrand();
           this.getCircle();
+          this.getList();
       },
       methods:{
+        //  去圈子
         toCircle(){
           this.$router.push('/circle/detail');
         },
+        //去公告列表
+        changeRoute(v){
+          this.$router.push(v);
+        },
+        //去公告详情
+        toNoticeDetail(item){
+          this.$router.push({path:'/notice/detail',query:{
+              CMid:item.cmid
+            }})
+        },
+        //获取品牌
         getBrand(){
           axios.get(api.brand_recommend,{
             params:{
@@ -253,6 +256,7 @@
             }
           })
         },
+        //获取圈子
         getCircle(){
           axios.get(api.get_all_news,{
             params:{
@@ -264,7 +268,20 @@
               this.circle_list = res.data.data;
             }
           })
-        }
+        },
+        //获取公告
+        getList(){
+          axios.get(api.club_list,{
+            params:{
+              page_num:1,
+              page_size:3
+            }
+          }).then(res => {
+            if(res.data.status == 200){
+              this.notice_list = res.data.data;
+            }
+          })
+        },
       }
     }
 </script>

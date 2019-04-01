@@ -10,9 +10,10 @@ if(location.origin.indexOf('localhost') != -1){
 const api={
   brand_recommend: title + 'index/brand_recommend',                                   // 首页精选商品 品牌
   get_all_news: title +'news/get_all_news',                  //获取圈子
+  get_news_content: title +'news/get_news_content',//圈子详情
   club_list: title +'club/list',                             //公告
   club_message: title +'club/message',                        //公告详情
-  create_message: title + 'club/create_message',               //留言
+  create_club: title + 'club/create',               //留言
 
 
 };

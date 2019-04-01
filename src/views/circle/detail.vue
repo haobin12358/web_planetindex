@@ -1,29 +1,36 @@
 <template>
   <div class="m-circle-detail-page">
-    <h3 class="m-title">标题</h3>
-    <p class="m-time">2019/03/20</p>
-    <ul class="m-img-list">
-      <li>
-        <img src="" alt="">
-      </li>
-    </ul>
-    <p class="m-text">
-      公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内…
-    </p>
-    <ul class="m-img-list">
-      <li>
-        <img src="" alt="">
-      </li>
-      <li>
-        <img src="" alt="">
-      </li>
-      <li>
-        <img src="" alt="">
-      </li>
-    </ul>
-    <p class="m-text">
-      公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内容公告内…
-    </p>
+    <h3 class="m-title">{{circle_message.netitle}}</h3>
+    <p class="m-time">{{circle_message.createtime}}</p>
+    <template v-for="(item,index) in circle_message.netext">
+      <ul class="m-img-list" v-if="item.type == 'image'">
+        <li v-for="(i,j) in item.content">
+          <img :src="i" alt="" @click="previewImg(i)">
+        </li>
+      </ul>
+      <p class="m-text" v-if="item.type == 'text'">
+      {{item.content}}
+      </p>
+      <div class="m-video-box" v-if="item.type == 'video'">
+        <video :src="item.content.video" id="videoPlay" v-if="show_video">您的浏览器不支持 video 视频播放</video>
+        <div class="m-img-box" @click="playVideo" v-else>
+          <img :src="item.content.thumbnail" alt="">
+          <span class="m-play-icon"></span>
+          <span class="m-video-time">{{item.content.duration}}</span>
+        </div>
+
+      </div>
+
+    </template>
+
+    <el-dialog
+      :visible.sync="dialogVisible"
+      width="1000px"
+    >
+
+      <img :src="dialogImg" style="display: block;width:100%;" alt="" >
+    </el-dialog>
+
 
     <div class="m-btn-box">
       <span><上一篇</span>
@@ -33,11 +40,46 @@
 </template>
 
 <script>
+  import axios from 'axios';
+  import api from '../../api/api'
   export default {
     name: "notice",
-    mounted(){
-      document.documentElement.scrollTop=0
+    data(){
+      return{
+        circle_message:null,
+        show_video:false,
+        dialogImg:'',
+        dialogVisible:false
+      }
     },
+    mounted(){
+      document.documentElement.scrollTop=0;
+      this.getMessage();
+    },
+    methods:{
+      getMessage(){
+        axios.get(api.get_news_content,{
+          params:{
+            neid:this.$route.query.neid
+          }
+        }).then(res => {
+          if(res.data.status == 200){
+            this.circle_message = res.data.data;
+          }
+        })
+      },
+      // 播放视频
+      playVideo() {
+        let vdo = document.getElementById("videoPlay");
+        this.show_video = true;
+        this.dialogVisible = true;
+        vdo.play();
+      },
+      previewImg(i){
+        this.dialogVisible = true;
+        this.dialogImg = i;
+      }
+    }
   }
 </script>
 

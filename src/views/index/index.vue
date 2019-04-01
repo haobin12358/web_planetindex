@@ -106,8 +106,8 @@
           <p class="m-title-intro">分享我的户外生活</p>
           <div class="m-circle-box">
             <el-carousel :interval="400000" type="card" v-if="$store.state.platform == 'pc'" height="580px">
-              <el-carousel-item v-for="item in circle_list" :key="item">
-                <div class="m-circle-detail" @click="toCircle">
+              <el-carousel-item v-for="item in circle_list" :key="item.neid">
+                <div class="m-circle-detail" @click="toCircle(item)">
                   <div class="m-circle-title">
                     <span>{{item.netitle}}</span>
                     <span class="m-time">{{item.createtime}}</span>
@@ -156,13 +156,9 @@
               </li>
             </ul>
             <ul v-if="$store.state.platform == 'mobile'">
-              <li>
-               <span class="m-title">1.公告标题1公告标题1公告标题1公告标题1公题1</span>
-                <span class="m-time">2019/03/20</span>
-              </li>
-              <li>
-                <span class="m-title">1.公告标题1公告标题1公告标题1公告标题1公题1</span>
-                <span class="m-time">2019/03/20</span>
+              <li v-for="(item,index) in notice_list" @click="toNoticeDetail(item)">
+               <span class="m-title">{{index +1 }}.{{item.cmtitle}}</span>
+                <span class="m-time">{{item.createtime.slice(0,10)}}</span>
               </li>
             </ul>
             <p class="m-notice-more">
@@ -172,14 +168,14 @@
 
           <h3 class="m-title" id="message">在线留言</h3>
           <div class="m-message-box">
-            <textarea name="" id="" ></textarea>
+            <textarea name="" v-model="create_message.UWmessage" id="" ></textarea>
            <div class="m-input-box">
              <div>
-               <input type="text" placeholder="姓名">
-               <input type="text" placeholder="姓名">
-               <input type="text" placeholder="姓名">
+               <input type="text" v-model="create_message.UWname" placeholder="姓名">
+               <input  v-model="create_message.UWtelphone" type="number" placeholder="联系电话">
+               <input type="text" v-model="create_message.UWemail" placeholder="邮箱">
              </div>
-             <span class="m-message-btn">提交</span>
+             <span class="m-message-btn" @click="createMes">提交</span>
            </div>
           </div>
         </section>
@@ -206,7 +202,8 @@
 
 <script type="text/ecmascript-6">
   import axios from 'axios';
-  import api from '../../api/api'
+  import api from '../../api/api';
+  import {Toast} from 'element-ui'
     export default {
         name: "index",
       data(){
@@ -215,6 +212,12 @@
             product_list:[],
             circle_list:[],
             notice_list:[],
+            create_message: {
+              UWmessage:'',
+              UWname:'',
+              UWtelphone:'',
+              UWemail:''
+            }
           }
       },
       mounted(){
@@ -229,8 +232,8 @@
       },
       methods:{
         //  去圈子
-        toCircle(){
-          this.$router.push('/circle/detail');
+        toCircle(item){
+          this.$router.push({path:'/circle/detail',query:{neid:item.neid}});
         },
         //去公告列表
         changeRoute(v){
@@ -282,6 +285,53 @@
             }
           })
         },
+      //  留言
+        createMes(){
+          if(this.create_message.UWmessage == ''){
+            this.$message({
+              message: '请填写留言内容',
+              type: 'warning'
+            });
+            return false;
+          }else if(this.create_message.UWname == ''){
+            this.$message({
+              message: '请填写姓名',
+              type: 'warning'
+            });
+            return false;
+          }else if(this.create_message.UWtelphone == ''){
+            this.$message({
+              message: '请填写联系方式',
+              type: 'warning'
+            });
+            return false;
+          }else if(this.create_message.UWemail == ''){
+            this.$message({
+              message: '请填写邮箱',
+              type: 'warning'
+            });
+            return false;
+          }
+          axios.post(api.create_club,this.create_message).then(res => {
+            if(res.data.status == 200){
+              this.create_message= {
+                  UWmessage:'',
+                  UWname:'',
+                  UWtelphone:'',
+                  UWemail:''
+              };
+              this.$message({
+                message: res.data.message,
+                type: 'success'
+              });
+            }else{
+              this.$message({
+                message: res.data.message,
+                type: 'warning'
+              });
+            }
+          })
+        }
       }
     }
 </script>

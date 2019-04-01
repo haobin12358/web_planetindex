@@ -25,7 +25,7 @@
 
     <el-dialog
       :visible.sync="dialogVisible"
-      width="1000px"
+      width="90%"
     >
 
       <img :src="dialogImg" style="display: block;width:100%;" alt="" >

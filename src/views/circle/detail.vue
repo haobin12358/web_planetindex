@@ -32,10 +32,10 @@
     </el-dialog>
 
 
-    <div class="m-btn-box">
-      <span><上一篇</span>
-      <span class="m-active">下一篇></span>
-    </div>
+    <!--<div class="m-btn-box">-->
+      <!--<span><上一篇</span>-->
+      <!--<span class="m-active">下一篇></span>-->
+    <!--</div>-->
   </div>
 </template>
 

@@ -263,6 +263,7 @@
         getCircle(){
           axios.get(api.get_all_news,{
             params:{
+              itid:'isrecommend',
               page_num:1,
               page_size:12
             }

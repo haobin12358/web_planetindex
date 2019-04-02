@@ -14,7 +14,7 @@ const api={
   club_list: title +'club/list',                             //公告
   club_message: title +'club/message',                        //公告详情
   create_club: title + 'club/create',               //留言
-
+  upload_file: title +'file/upload',   ///上传图片
 
 };
 

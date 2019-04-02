@@ -14,7 +14,8 @@ Vue.prototype.$http = axios;
 // 超时时间
 axios.defaults.timeout = 60000;
 
-
+import api from './api/api'
+Vue.prototype.$api = api;
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 

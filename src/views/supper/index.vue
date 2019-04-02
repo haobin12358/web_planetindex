@@ -89,12 +89,20 @@
             </div>
 
             <div>
-              <el-checkbox v-model="checked">
-                供应商入驻大行星平台<span class="m-underline">用户须知</span>
+              <el-checkbox v-model="form.checked">
+                供应商入驻大行星平台<span class="m-underline" @click.stop="userKnowe = true">用户须知</span>
               </el-checkbox>
             </div>
           </div>
-
+          <el-dialog
+            title="用户须知"
+            :visible.sync="userKnowe"
+            >
+            <span>这是一段信息</span>
+            <span slot="footer" class="dialog-footer">
+              <el-button type="primary" @click="userKnowe = false">确 定</el-button>
+            </span>
+          </el-dialog>
         </div>
       </el-form>
 
@@ -108,7 +116,8 @@
           return{
             form: {
               name: '',
-              region: ''
+              region: '',
+              checked:false
             },
             ruleForm:{
               pcname: [
@@ -117,7 +126,8 @@
             },
             secondStep:false,
             dialogImageUrl: '',
-            dialogVisible: false
+            dialogVisible: false,
+            userKnowe:false
           }
       },
       computed: {

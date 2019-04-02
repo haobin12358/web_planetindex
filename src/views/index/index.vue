@@ -90,8 +90,8 @@
                 </li>
               </ul>
               <div class="m-activity-img-box" v-if="$store.state.platform == 'pc'">
-                <img src="" class="m-activity-img" alt="">
-                <p>微信扫码查看活动详情</p>
+                <img src="/static/images/activity.png" class="m-activity-img" alt="">
+                <!--<p>微信扫码查看活动详情</p>-->
               </div>
             </div>
             <!--<div class="m-wei-code-box">-->
@@ -182,16 +182,16 @@
         <footer class="m-footer" id="telephone">
           <img src="" class="m-footer-code" alt="">
           <div class="m-footer-text">
-            <p>地址：大行星地址大行星地址行星地址大行星地址</p>
+            <p>地址：杭州市富阳区富闲路银湖创新中心6号楼16层</p>
             <p v-if="$store.state.platform == 'pc'">
-              <span>咨询电话：11111111111 </span>
-              <span>邮箱地址：11111111111 @163.com</span>
+              <span>咨询电话：0571-82812523 </span>
+              <span>邮箱地址：kuahu123@163.com</span>
             </p>
             <p v-if="$store.state.platform == 'mobile'">
-              咨询电话：11111111111
+              咨询电话：0571-82812523
             </p>
             <p v-if="$store.state.platform == 'mobile'">
-             邮箱地址：11111111111 @163.com
+             邮箱地址：kuahu123@163.com
             </p>
           </div>
         </footer>

@@ -1,5 +1,5 @@
 <template>
-  <div class="m-top-nav " :class=" $store.state.platform == 'mobile'?'mobile': (is_index?'':'m-not-index')">
+  <div class="m-top-nav " :class="[{'fixed':$store.state.navBar_fixed},{'mobile':$store.state.platform }, {'m-not-index':is_index}]">
     <div class="m-side-bg" v-if="$store.state.platform == 'mobile' && show_side">
       <img src="/static/images/icon-slide.png" class="m-side-more" alt="" @click="changeSide">
       <ul>
@@ -23,56 +23,7 @@
   export default {
     data(){
       return{
-        nav_list:[
-          {
-            name:'首页',
-            url:'/',
-            value:'index',
-            click:true
-          },
-          {
-            name:'大行星介绍',
-            url:'introduce',
-            value:'introduce',
-            click:false
-          },
-          {
-            name:'前往商城',
-            url:'product',
-            value:'product',
-            click:false
-          },
-          {
-            name:'行星圈子',
-            url:'circle',
-            value:'circle',
-            click:false
-          },
-          {
-            name:'合作伙伴',
-            url:'partner',
-            value:'partner',
-            click:false
-          },
-          {
-            name:'公司公告',
-            url:'/notice/index',
-            value:'notice',
-            click:false
-          },
-          {
-            name:'在线留言',
-            url:'message',
-            value:'message',
-            click:false
-          },
-          {
-            name:'联系方式',
-            url:'telephone',
-            value:'telephone',
-            click:false
-          }
-        ],
+        nav_list:this.$store.state.nav_list,
         show_side:false
       }
     },
@@ -89,6 +40,10 @@
       navClick(item,index){
         this.$store.state.select_name = item.name;
         if(item.url.indexOf('/') > -1){
+          console.log(location)
+          if(item.url == '/' ){
+            document.documentElement.scrollTop=0;
+          }
           this.$router.push(item.url)
         }else{
           if(this.$route.name != 'index'){

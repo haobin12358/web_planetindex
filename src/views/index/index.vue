@@ -2,7 +2,7 @@
     <div class="m-index">
       <!--<img src="/static/images/index-top-back.png" class="m-index-top-back" alt="">-->
       <div class="m-index-content">
-        <section class="m-index-top">
+        <section class="m-index-top" id="index">
           <div class="m-index-top-introduce">
             <h2>大行星</h2>
             <div >
@@ -224,6 +224,8 @@
           if(this.$route.query.id){
             document.getElementById(this.$route.query.id).scrollIntoView();
           }
+        window.addEventListener('scroll', this.handleScroll)
+
       },
       created(){
           this.getBrand();
@@ -332,8 +334,32 @@
               });
             }
           })
-        }
-      }
+        },
+        //滚动
+        handleScroll () {
+          let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+          if(scrollTop >0){
+            this.$store.state.navBar_fixed = true
+          }else{
+            this.$store.state.navBar_fixed = false
+            this.$store.state.select_name = '首页'
+          }
+          for(let i in this.$store.state.nav_list){
+            if(this.$store.state.nav_list[i].url.indexOf('/') == -1){
+              let offsetTop = document.querySelector('#' + this.$store.state.nav_list[i].url).offsetTop
+              if (scrollTop >=  offsetTop) {
+                // this.searchBarFixed = true
+                this.$store.state.select_name = this.$store.state.nav_list[i].name;
+              }
+            }
+
+          }
+
+        },
+      },
+      destroyed () {
+        window.removeEventListener('scroll', this.handleScroll)
+      },
     }
 </script>
 

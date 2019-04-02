@@ -12,7 +12,7 @@
                 首页控制在六十字以内
                 作为宣传简介</p>
             </div>
-            <span class="m-now-btn" v-if="$store.state.platform == 'pc'">马上体验</span>
+            <span class="m-now-btn" v-if="$store.state.platform == 'pc'" @click="nowUse">马上体验</span>
 
 
             <div class="m-top-code-box" v-if="$store.state.platform == 'pc'">
@@ -22,9 +22,9 @@
           </div>
         </section>
         <div  v-if="$store.state.platform == 'mobile'">
-          <span class="m-now-btn">马上体验</span>
+          <span class="m-now-btn" @click="nowUse">马上体验</span>
           <p>
-            <span class="m-now-btn">供应商入驻</span>
+            <span class="m-now-btn" @click="changeSupper">供应商入驻</span>
           </p>
         </div>
         <section class="m-index-center">
@@ -73,7 +73,7 @@
 
 
           <h3 class="m-title" id="product">加入大行星</h3>
-          <img src="" class="m-activity-img" v-if="$store.state.platform == 'mobile'" alt="">
+          <img :src="activity_img" class="m-activity-img" v-if="$store.state.platform == 'mobile'" alt="">
           <div class="m-add-product">
             <div class="m-product">
               <ul class="m-product-ul">
@@ -90,7 +90,7 @@
                 </li>
               </ul>
               <div class="m-activity-img-box" v-if="$store.state.platform == 'pc'">
-                <img src="/static/images/activity.png" class="m-activity-img" alt="">
+                <img :src="activity_img" class="m-activity-img" alt="">
                 <!--<p>微信扫码查看活动详情</p>-->
               </div>
             </div>
@@ -217,7 +217,8 @@
               UWname:'',
               UWtelphone:'',
               UWemail:''
-            }
+            },
+            activity_img:'/static/images/activity.png'
           }
       },
       mounted(){
@@ -355,6 +356,15 @@
 
           }
 
+        },
+      //  马上体验
+        nowUse(){
+          document.getElementById('product').scrollIntoView();
+        },
+        //供应商入驻
+        changeSupper(){
+          this.$store.state.select_name = '';
+          this.$router.push('/supper/index')
         },
       },
       destroyed () {

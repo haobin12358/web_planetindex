@@ -5,14 +5,36 @@
         <section class="m-index-top" id="index">
           <div class="m-index-top-introduce">
             <h2>大行星</h2>
-            <div >
-              <p class="m-introduce-text">大行星的一些简介
-                大行星的一些
-                简介字数不要太多放在
-                首页控制在六十字以内
-                作为宣传简介</p>
+            <div class="m-index-intro" v-if="$store.state.platform == 'pc'">
+              <p class="m-introduce-text">
+                行星精选,  优品户外</p>
+<!--              <p class="m-introduce-text">-->
+<!--                </p>-->
+              <p class="m-introduce-text">
+                伴行天下,  共享旅途
+                </p>
+<!--              <p class="m-introduce-text">-->
+<!--                -->
+<!--              </p>-->
             </div>
-            <span class="m-now-btn" v-if="$store.state.platform == 'pc'" @click="nowUse">马上体验</span>
+            <div class="m-index-intro" v-else>
+              <p class="m-introduce-text">
+                行星精选</p>
+              <p class="m-introduce-text">
+                优品户外
+                </p>
+              <p class="m-introduce-text">
+                伴行天下
+              </p>
+              <p class="m-introduce-text">
+                 共享旅途
+              </p>
+            </div>
+
+            <div>
+              <span class="m-now-btn" v-if="$store.state.platform == 'pc'" @click="nowUse">马上体验</span>
+            </div>
+
 
 
             <div class="m-top-code-box" v-if="$store.state.platform == 'pc'">

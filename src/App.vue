@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="$store.state.platform == 'pc'?'pc':'m-mobile'">
     <!--<img src="./assets/logo.png">-->
     <router-view/>
   </div>
@@ -10,17 +10,19 @@ export default {
   name: 'App',
   created: function () {
     if (document.documentElement.clientWidth > 750) {
-      require('./style/pc.less');
+      // require('./style/pc.less');
       this.$store.state.platform = 'pc';
     } else {
-      require('./style/mobile.less');
+      // require('./style/mobile.less');
       this.$store.state.platform = 'mobile';
     }
   }
 }
 </script>
 
-<style>
+<style lang="less">
+  @import "style/pc.less";
+  @import "style/mobile.less";
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

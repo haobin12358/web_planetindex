@@ -36,35 +36,29 @@
               <li>
                 <img src="/static/images/function-member.png" class="m-function-icon" alt="">
                 <h3>会员管理</h3>
-                <p class="m-text">会员管理的一句话简介
-                  不要超过二十个字</p>
+                <p class="m-text">团队数据一览无余</p>
               <li>
                 <img src="/static/images/function-equipment.png" class="m-function-icon" alt="">
                 <h3>装备分销</h3>
-                <p class="m-text">会员管理的一句话简介
-                  不要超过二十个字</p>
+                <p class="m-text">谁说躺着不能赚钱--致新时代</p>
               </li>
               <li>
                 <img src="/static/images/function-equipment.png" class="m-function-icon" alt="">
                 <h3>营销工具</h3>
-                <p class="m-text">会员管理的一句话简介
-                  不要超过二十个字</p>
+                <p class="m-text">最全、最新的分销黑科技皆汇于此</p>
               <li>
                 <img src="/static/images/function-h5.png" class="m-function-icon" alt="">
                 <h3>微信公众号</h3>
-                <p class="m-text">会员管理的一句话简介
-                  不要超过二十个字</p>
+                <p class="m-text">户外风光尽收眼底，随时随地放飞自我</p>
               </li>
               <li>
                 <img src="/static/images/function-app.png" class="m-function-icon" alt="">
                 <h3>APP</h3>
-                <p class="m-text">会员管理的一句话简介
-                  不要超过二十个字</p>
+                <p class="m-text">自带沉浸模式黑科技，享受一站式户外之旅</p>
               <li>
                 <img src="/static/images/function-data.png" class="m-function-icon" alt="">
                 <h3>数据监控</h3>
-                <p class="m-text">会员管理的一句话简介
-                  不要超过二十个字</p>
+                <p class="m-text">掌握大数据时代浪潮</p>
               </li>
             </ul>
             <img src="/static/images/index-more-index.png" v-if="$store.state.platform == 'pc'" class="m-index-more-index" alt="">

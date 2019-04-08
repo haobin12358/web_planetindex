@@ -62,7 +62,7 @@
               :on-success="handleHeaderSuccess"
               :on-preview="handlePictureCardPreview"
               :on-remove="handleLicenseRemove">
-              <img v-if="form.subusinesslicense" :key="form.subusinesslicense" v-lazy="form.subusinesslicense"
+              <img v-if="form.subusinesslicense" :key="form.subusinesslicense"
                    class="avatar">
               <i class="el-icon-plus"></i>
             </el-upload>
@@ -91,7 +91,7 @@
                   :on-success="handleFrontSuccess"
                   :on-preview="handlePictureCardPreview"
                   :on-remove="handleFrontRemove">
-                  <img v-if="form.sulegalpersonidcardfront" :key="form.sulegalpersonidcardfront" v-lazy="form.sulegalpersonidcardfront"
+                  <img v-if="form.sulegalpersonidcardfront" :key="form.sulegalpersonidcardfront"
                        class="avatar">
                   <i class="el-icon-plus"></i>
                 </el-upload>
@@ -108,7 +108,7 @@
                   :on-success="handleBackSuccess"
                   :on-preview="handlePictureCardPreview"
                   :on-remove="handleEndRemove">
-                  <img v-if="form.sulegalpersonidcardback" :key="form.sulegalpersonidcardback" v-lazy="form.sulegalpersonidcardback"
+                  <img v-if="form.sulegalpersonidcardback" :key="form.sulegalpersonidcardback"
                        class="avatar">
                   <i class="el-icon-plus"></i>
                 </el-upload>
@@ -125,7 +125,7 @@
             </div>
 
             <div>
-              <el-checkbox v-model="form.checked">
+              <el-checkbox v-model="checked">
                 供应商入驻大行星平台<span class="m-underline" @click.stop="userKnowe = true">用户须知</span>
               </el-checkbox>
             </div>
@@ -168,9 +168,9 @@
               sulegalpersonidcardfront:'',
               sulegalpersonidcardback:'',
               name: '',
-              region: '',
-              checked:false
+              region: ''
             },
+            checked:false,
             ruleForm:{
               suloginphone: [
                 {required: true, message: '手机好必填', trigger: 'blur'}
@@ -233,7 +233,7 @@
           return this.$api.upload_file
         },
         uploadVoucherUrl() {
-          return this.$api.upload_file  + '&type=voucher'
+          return this.$api.upload_file  + '?type=contract'
         },
       },
       watch: {
@@ -305,44 +305,35 @@
         },
         //提交
         doSave() {
+          if(!this.checked){
+            this.$message.warning('请先同意该平台的用户须知!');
+            return false;
+          }
           this.$refs.form.validate(
             valid => {
               if (valid) {
-                // if (this.form.suid) {
-                //   // this.supplierForm.pbids = [this.supplierForm.pbids];
-                //   this.$http.post(this.$api.update_supplizer, this.supplierForm).then(
-                //     res => {
-                //       if (res.data.status == 200) {
-                //         let resData = res.data,
-                //           data = res.data.data;
-                //
-                //         this.$router.push('/user/suppliers');
-                //         this.$notify({
-                //           title: '供应商编辑成功',
-                //           message: `供应商名称:${this.supplierForm.suname}`,
-                //           type: 'success'
-                //         });
-                //       }
-                //     }
-                //   )
-                // } else {
-                //   this.form.suloginphone = this.form.sulinkphone;
-                //   this.$http.post(this.$api.create_supplizer, this.supplierForm).then(
-                //     res => {
-                //       if (res.data.status == 200) {
-                //         let resData = res.data,
-                //           data = res.data.data;
-                //
-                //         this.$router.push('/user/suppliers');
-                //         this.$notify({
-                //           title: '供应商新增成功',
-                //           message: `供应商名称:${this.supplierForm.suname}`,
-                //           type: 'success'
-                //         });
-                //       }
-                //     }
-                //   )
-                // }
+                  this.form.suloginphone = this.form.sulinkphone;
+                  this.$http.post(this.$api.create_supplizer, this.form).then(
+                    res => {
+                      if (res.data.status == 200) {
+                        let resData = res.data,
+                          data = res.data.data;
+
+                        this.$router.push('/index');
+                        this.$notify({
+                          title: '供应商新增成功',
+                          message: `供应商名称:${this.form.suname}，等待大行星客服电话联系`,
+                          type: 'success'
+                        });
+                      }else{
+                        this.$notify({
+                            title: '提示',
+                          message: res.data.message,
+                          type: 'success'
+                        });
+                      }
+                    }
+                  )
               } else {
                 this.$message.warning('请根据校验信息完善表单!');
               }

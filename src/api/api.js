@@ -15,7 +15,7 @@ const api={
   club_message: title +'club/message',                        //公告详情
   create_club: title + 'club/create',               //留言
   upload_file: title +'file/upload',   ///上传图片
-
+  create_supplizer: title +'supplizer/create' ,//供应商
 };
 
 

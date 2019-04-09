@@ -8,8 +8,7 @@
           <img :src="i" alt="" @click="previewImg(i)">
         </li>
       </ul>
-      <p class="m-text" v-if="item.type == 'text'">
-      {{item.content}}
+      <p class="m-text" v-if="item.type == 'text'" v-html="item.content">
       </p>
       <div class="m-video-box" v-if="item.type == 'video'">
         <video :src="item.content.video" id="videoPlay" :poster="item.content.thumbnail" controls="controls" >您的浏览器不支持 video 视频播放</video>

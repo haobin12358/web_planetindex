@@ -14,7 +14,7 @@
         {{item.name}}
       </li>
     </ul>
-    <span v-if=" $store.state.platform == 'pc'" class="m-supper-btn" @click="changeSupper">·供应商入驻</span>
+    <span v-if=" $store.state.platform == 'pc'" class="m-supper-btn" @click="changeSupper">· 供应商入驻</span>
   </div>
 
 </template>

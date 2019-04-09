@@ -184,19 +184,19 @@
 
           <h3 class="m-title" id="message">在线留言</h3>
           <div class="m-message-box">
-            <textarea name="" v-model="create_message.uwmessage" id="" ></textarea>
+            <textarea name="" v-model="create_message.uwmessage" id="" maxlength="1000"></textarea>
            <div class="m-input-box">
              <div>
-               <input type="text" v-model="create_message.uwname" placeholder="姓名">
-               <input  v-model="create_message.uwtelphone" type="number" placeholder="联系电话">
-               <input type="text" v-model="create_message.uwemail" placeholder="邮箱">
+               <input type="text" v-model="create_message.uwname" placeholder="姓名" maxlength="15">
+               <input  v-model.number="create_message.uwtelphone" maxlength="11" placeholder="联系电话">
+               <input type="text" v-model="create_message.uwemail" placeholder="邮箱" maxlength="100">
              </div>
              <span class="m-message-btn" @click="createMes">提交</span>
            </div>
           </div>
         </section>
         <footer class="m-footer" id="telephone">
-          <img src="" class="m-footer-code" alt="">
+          <img src="/static/images/weixin-code.jpeg" class="m-footer-code" alt="">
           <div class="m-footer-text">
             <p>地址：杭州市富阳区富闲路银湖创新中心6号楼16层</p>
             <p v-if="$store.state.platform == 'pc'">

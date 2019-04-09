@@ -1,8 +1,8 @@
 <template>
-  <div class="m-circle-detail-page">
+  <div class="m-circle-detail-page" v-if="message_info">
     <h3 class="m-title">{{message_info.cmtitle}}</h3>
     <p class="m-time">{{message_info.createtime}}</p>
-    <div v-html="message_info.cmmessage">
+    <div class="m-quill-box" v-html="message_info.cmmessage">
     </div>
 
     <div class="m-btn-box">

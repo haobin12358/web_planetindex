@@ -354,7 +354,6 @@
         },
         //滚动
         handleScroll() {
-          console.log('sdsds')
           let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
           if(scrollTop >0){
             this.$store.state.navBar_fixed = true

@@ -1,5 +1,5 @@
 <template>
-  <div class="m-top-nav " :class="[{'fixed':$store.state.navBar_fixed},{'mobile':$store.state.platform }, {'m-not-index':is_index}]">
+  <div class="m-top-nav " :class="[{'fixed':fixed},{'mobile':$store.state.platform == 'mobile' }, {'m-not-index':is_index}]">
     <div class="m-side-bg" v-if="$store.state.platform == 'mobile' && show_side">
       <img src="/static/images/icon-slide.png" class="m-side-more" alt="" @click="changeSide">
       <ul>
@@ -24,13 +24,25 @@
     data(){
       return{
         nav_list:this.$store.state.nav_list,
-        show_side:false
+        show_side:false,
+        fixed:false
       }
     },
     props:{
       is_index:{
         type:Boolean,
         default:true
+      }
+    },
+    computed: {
+      isFixed () {
+        return this.$store.state.navBar_fixed;　　//需要监听的数据
+      }
+    },
+    watch: {
+      isFixed (newVal, oldVal) {
+        //do something
+        this.fixed = newVal
       }
     },
     mounted(){

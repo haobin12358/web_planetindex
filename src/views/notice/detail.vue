@@ -31,7 +31,7 @@
       getMessage( id ){
         axios.get(api.club_message,{
           params:{
-            CMid: id || this.$route.query.CMid
+            cmid: id || this.$route.query.cmid
           }
         }).then(res => {
           if(res.data.status == 200){

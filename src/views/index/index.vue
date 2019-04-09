@@ -1,5 +1,5 @@
 <template>
-    <div class="m-index">
+    <div class="m-index" >
       <!--<img src="/static/images/index-top-back.png" class="m-index-top-back" alt="">-->
       <div class="m-index-content">
         <section class="m-index-top" id="index">
@@ -184,12 +184,12 @@
 
           <h3 class="m-title" id="message">在线留言</h3>
           <div class="m-message-box">
-            <textarea name="" v-model="create_message.UWmessage" id="" ></textarea>
+            <textarea name="" v-model="create_message.uwmessage" id="" ></textarea>
            <div class="m-input-box">
              <div>
-               <input type="text" v-model="create_message.UWname" placeholder="姓名">
-               <input  v-model="create_message.UWtelphone" type="number" placeholder="联系电话">
-               <input type="text" v-model="create_message.UWemail" placeholder="邮箱">
+               <input type="text" v-model="create_message.uwname" placeholder="姓名">
+               <input  v-model="create_message.uwtelphone" type="number" placeholder="联系电话">
+               <input type="text" v-model="create_message.uwemail" placeholder="邮箱">
              </div>
              <span class="m-message-btn" @click="createMes">提交</span>
            </div>
@@ -229,10 +229,10 @@
             circle_list:[],
             notice_list:[],
             create_message: {
-              UWmessage:'',
-              UWname:'',
-              UWtelphone:'',
-              UWemail:''
+              uwmessage:'',
+              uwUWname:'',
+              uwtelphone:'',
+              uwemail:''
             },
             activity_img:'/static/images/activity.png'
           }
@@ -261,7 +261,7 @@
         //去公告详情
         toNoticeDetail(item){
           this.$router.push({path:'/notice/detail',query:{
-              CMid:item.cmid
+              cmid:item.cmid
             }})
         },
         //获取品牌
@@ -307,25 +307,25 @@
         },
       //  留言
         createMes(){
-          if(this.create_message.UWmessage == ''){
+          if(this.create_message.uwmessage == ''){
             this.$message({
               message: '请填写留言内容',
               type: 'warning'
             });
             return false;
-          }else if(this.create_message.UWname == ''){
+          }else if(this.create_message.uwname == ''){
             this.$message({
               message: '请填写姓名',
               type: 'warning'
             });
             return false;
-          }else if(this.create_message.UWtelphone == ''){
+          }else if(this.create_message.uwtelphone == ''){
             this.$message({
               message: '请填写联系方式',
               type: 'warning'
             });
             return false;
-          }else if(this.create_message.UWemail == ''){
+          }else if(this.create_message.uwemail == ''){
             this.$message({
               message: '请填写邮箱',
               type: 'warning'
@@ -335,10 +335,10 @@
           axios.post(api.create_club,this.create_message).then(res => {
             if(res.data.status == 200){
               this.create_message= {
-                  UWmessage:'',
-                  UWname:'',
-                  UWtelphone:'',
-                  UWemail:''
+                  uwmessage:'',
+                uwname:'',
+                  uwtelphone:'',
+                uwemail:''
               };
               this.$message({
                 message: res.data.message,
@@ -353,7 +353,8 @@
           })
         },
         //滚动
-        handleScroll () {
+        handleScroll() {
+          console.log('sdsds')
           let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
           if(scrollTop >0){
             this.$store.state.navBar_fixed = true

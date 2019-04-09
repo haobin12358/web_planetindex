@@ -41,14 +41,15 @@
       methods:{
         changeDetail(item){
           this.$router.push({path:'/notice/detail',query:{
-              CMid:item.cmid
+              cmid:item.cmid
             }})
         },
         getList(){
           axios.get(api.club_list,{
             params:{
               page_num:this.page_info.page_num,
-              page_size:this.page_info.page_size
+              page_size:this.page_info.page_size,
+              cmindex:2
             }
           }).then(res => {
               if(res.data.status == 200){

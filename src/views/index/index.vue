@@ -140,7 +140,7 @@
                   <span class="m-time">{{item.createtime.slice(0,10)}}</span>
                 </div>
                 <img :src="item.mainpic" class="m-circle-img" alt="">
-                <p>item</p>
+                <p>{{item.netext || '大行星精选'}}</p>
               </div>
             </div>
 

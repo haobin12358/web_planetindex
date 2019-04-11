@@ -199,6 +199,7 @@
           <img src="/static/images/weixin-code.jpeg" class="m-footer-code" alt="">
           <div class="m-footer-text">
             <p>地址：杭州市富阳区富闲路银湖创新中心6号楼16层</p>
+            <p>浙ICP备18056465号-1</p>
             <p v-if="$store.state.platform == 'pc'">
               <span>咨询电话：0571-82812523 </span>
               <span>邮箱地址：kuahu123@163.com</span>

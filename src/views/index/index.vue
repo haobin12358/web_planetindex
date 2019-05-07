@@ -156,7 +156,10 @@
                 </li>
                 <li class="m-brand-text">
                   <h3>{{item.pbname}}</h3>
-                  <p>{{item.pbdesc}}</p>
+                  <el-tooltip class="item" effect="dark" :content="item.pbdesc" placement="top">
+                    <p class="m-brand-desc">{{item.pbdesc}}</p>
+                  </el-tooltip>
+
                 </li>
               </template>
             </ul>
@@ -201,14 +204,14 @@
             <p>地址：杭州市富阳区富闲路银湖创新中心6号楼16层</p>
             <p>浙ICP备18056465号-1</p>
             <p v-if="$store.state.platform == 'pc'">
-              <span>咨询电话：0571-82812523 </span>
-              <span>邮箱地址：kuahu123@163.com</span>
+              <span>咨询电话：15079564151 </span>
+              <span> 客服QQ：3441362480</span>
             </p>
             <p v-if="$store.state.platform == 'mobile'">
-              咨询电话：0571-82812523
+              咨询电话：15079564151
             </p>
             <p v-if="$store.state.platform == 'mobile'">
-             邮箱地址：kuahu123@163.com
+             客服QQ：3441362480
             </p>
           </div>
         </footer>

@@ -2,9 +2,9 @@
 // const title = 'https://www.bigxingxing.com/api/v1/'; //正式
 let title = '';
 if(location.origin.indexOf('localhost') != -1  || location.origin.indexOf('testclub') != -1){
-  title = 'https://test.bigxingxing.com/api/v1/'; //测试
+  title = 'https://test.bigxingxing.com/api/v2/'; //测试
 }else{
-  title = 'https://www.bigxingxing.com/api/v1/';//正式
+  title = 'https://www.bigxingxing.com/api/v2/';//正式
 }
 
 const api={
